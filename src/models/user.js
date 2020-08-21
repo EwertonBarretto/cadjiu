@@ -16,33 +16,13 @@ const user = (sequelize, DataTypes) => {
           }
         }
       },
-      login: {
-        type: DataTypes.STRING(6),
-        allowNull: false,
-        unique: true,
-        validate: {
-          len: {
-            notEmpty: true,
-            args: [0, 6],
-            msg: 'Max. caracteres is 6'
-          }
-        }
-      },
       cellPhone: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      identifier: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          notEmpty: true
-        }
-      },
       email: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        allowNull: true,
         unique: {
           args: true,
           msg: 'Email address already in use!'
@@ -54,10 +34,32 @@ const user = (sequelize, DataTypes) => {
           notEmpty: true
         }
       },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }
+      belt:{
+        type:DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "White"
+      },  
+      weight:{
+        type:DataTypes.BOOLEAN,
+        allowNull: true,
+      },
+      status:{
+        type:DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: "1"
+      },
+      dt_birth:{
+        type:DataTypes.DATEONLY,
+        allowNull: true,
+      },
+      dt_lastpay:{
+        type:DataTypes.DATEONLY,
+        allowNull: true,
+      },
+      dt_due:{
+        type:DataTypes.DATEONLY,
+        allowNull: true,
+      },
     });
     
     // User.associate = models => {
@@ -66,12 +68,12 @@ const user = (sequelize, DataTypes) => {
 
     User.findByLogin = async login => {
       let user = await User.findOne({
-        where: { username: login },
+        where: { username: fullName },
       });
   
       if (!user) {
         user = await User.findOne({
-          where: { email: login },
+          where: { email: fullName },
         });
       }
   

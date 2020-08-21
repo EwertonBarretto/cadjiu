@@ -8,11 +8,9 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-//app.get('/', res.send('Hello World!!'));
-
 app.use('/api', routersApp);
 
-const eraseDatabaseOnSync = false;
+const eraseDatabaseOnSync = true;
 
 conection.sync({ force: eraseDatabaseOnSync }).then(async () => {
   app.listen({ port: port }, () => {

@@ -31,11 +31,14 @@ router.post('', async (req, res) => {
   await models.User.create(
   {
       fullName: req.body.fullName,
-      login: req.body.login,
+      belt: req.body.belt,
       cellPhone: req.body.cellPhone,
-      identifier: req.body.identifier,
+      status: req.body.status,
       email: req.body.email,
-      password: req.body.password,
+      weight: req.body.weight,
+      dt_birth : req.body.dt_birth,
+      dt_lastpay: req.body.dt_lastpay,
+      dt_due: req.body.dt_due
   }).then((info) => {
     res.status(200).send(info);
     return;
@@ -48,11 +51,14 @@ router.post('', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const userNew = await models.User.update({
     fullName: req.body.fullName,
-    login: req.body.login,
-    cellPhone: req.body.cell,
-    identifier: req.body.identifier,
+    belt: req.body.belt,
+    cellPhone: req.body.cellPhone,
+    status: req.body.status,
     email: req.body.email,
-    password: req.body.password,
+    weight: req.body.weight,
+    dt_birth : req.body.dt_birth,
+    dt_lastpay: req.body.dt_lastpay,
+    dt_due: req.body.dt_due
   },
   {
     where: {
